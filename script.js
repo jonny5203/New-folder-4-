@@ -157,7 +157,6 @@ function gameOverFunction() {
         highscore = points;
     }
 
-    //points = 0;
     currentApplePosition = 6;
     gameStart = false;
     updateView();
