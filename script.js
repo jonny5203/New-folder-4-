@@ -89,13 +89,21 @@ function updateView() {
 
 document.addEventListener('keydown', function (event) {
     if (event.key == "w") {
-        snake.direction = 0;
+        if(snake.direction != 2){
+            snake.direction = 0;
+        }
     } else if (event.key == "a") {
-        snake.direction = 1;
+        if(snake.direction != 3){
+            snake.direction = 1;
+        }
     } else if (event.key == "s") {
-        snake.direction = 2;
+        if(snake.direction != 0){
+            snake.direction = 2;
+        }
     } else if (event.key == "d") {
-        snake.direction = 3;
+        if(snake.direction != 1){
+            snake.direction = 3;
+        }
     }
 });
 
@@ -128,24 +136,12 @@ function moveSnake() {
         } else {
             //console.log(i);
             if (snake.direction == 0) {
-                if(snake.position[snake.position.length - 2] == snake.position[i]){
-                    return;
-                }
                 snake.position[i] -= 16;
             } else if (snake.direction == 1) {
-                if(snake.position[snake.position.length - 2] == snake.position[i]){
-                    return;
-                }
                 snake.position[i] -= 1;
             } else if (snake.direction == 2) {
-                if(snake.position[snake.position.length - 2] == snake.position[i]){
-                    return;
-                }
                 snake.position[i] += 16;
             } else if (snake.direction == 3) {
-                if(snake.position[snake.position.length - 2] == snake.position[i]){
-                    return;
-                }
                 snake.position[i] += 1;
             }
         }
