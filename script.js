@@ -134,7 +134,7 @@ function gameOverFunction() {
             3,
             4
         ],
-        direction: 3,
+        direction: 1,
         getPosition: function (a, b) {
             let y = a + b;
             return y;
@@ -170,6 +170,10 @@ function moveSnake() {
                 }
                 snake.position[i] -= 16;
             } else if (snake.direction == 1) {
+                if(snake.position[i] % 16 == 0){
+                    gameOverFunction();
+                    return;
+                }
                 if (snake.position[i] - 1 < 0 || snake.position[i] - 1 == null || snake.position.includes(snake.position[i] - 1)) {
                     gameOverFunction();
                     return;
@@ -182,6 +186,14 @@ function moveSnake() {
                 }
                 snake.position[i] += 16;
             } else if (snake.direction == 3) {
+                let counter = 15;
+                while(counter <= 255){
+                    if(snake.position[i] == counter){
+                        gameOverFunction();
+                        return;
+                    }
+                    counter += 16;
+                }
                 if (snake.position[i] + 1 > 255 || snake.position[i] + 1 == null || snake.position.includes(snake.position[i] + 1)) {
                     gameOverFunction();
                     return;
