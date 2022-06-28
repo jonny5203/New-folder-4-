@@ -3,6 +3,7 @@ let app;
 //Model
 let gameStart = false;
 let points = 0;
+let highscore = 0;
 let gameOver = false;
 
 const board = 16 ** 2;
@@ -243,8 +244,4 @@ function applePlacement() {
     }
 
     currentApplePosition = availableSpace[Math.floor(Math.random() * availableSpace.length)];
-}
-
-function mapKeyboard() {
-
 }
