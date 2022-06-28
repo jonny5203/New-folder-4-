@@ -33,6 +33,12 @@ const right = 'd';
 const left = 'a';
 
 
+// vanskelighetsgrader
+const easy = 300;
+const medium = 150;
+const hard = 50;
+
+
 //View
 window.onload = function () {
     app = document.getElementById('app');
@@ -41,7 +47,10 @@ window.onload = function () {
 function updateView() {
     let htmlCode = '';
     if (!gameOver) {
-        htmlCode += `<button onclick="startGameLoop()">Start</button></br>`;
+        htmlCode += `
+        <button onclick="startGameLoop(${easy})">Easy</button>
+        <button onclick="startGameLoop(${medium})">Medium</button>
+        <button onclick="startGameLoop(${hard})">Hard</button></br>`;
 
         for (let i = 0; i < board; i++) {
             if (i % 16 == 0 && i != 0) {
@@ -83,12 +92,11 @@ function updateView() {
         }
 
         htmlCode += `</br></br><h1>Du har: ${points} poeng</h1>`;
-        htmlCode += `<h1>Highscore: ${highscore} poeng</h1>`;
+        htmlCode += `<h1>Highscoren din er: ${highscore} poeng</h1>`;
 
     } else {
         htmlCode += /*HTML*/`
         <h1>Game over! Du fikk ${points} poeng!</h1>
-        <h1>Highscoren din er: ${highscore}</h1>
         <p>Spill igjen? <button onclick ="restart()">Start på nytt</button></p>
         `;
     }
@@ -99,8 +107,8 @@ function updateView() {
 //Controller
 
 function restart() {
-    gameOver = false;
     points = 0;
+    gameOver = false;
     updateView();
 }
 
@@ -124,8 +132,8 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-function startGameLoop() {
-    gameInterval = setInterval(gameTick, 300);
+function startGameLoop(a) {
+    gameInterval = setInterval(gameTick, a);
 }
 
 function gameOverFunction() {
