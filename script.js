@@ -43,6 +43,8 @@ window.onload = function () {
 function updateView() {
     let htmlCode = '';
     if (!gameOver) {
+        htmlCode += `<button onclick="startGameLoop()">Start</button></br>`;
+
         for (let i = 0; i < board; i++) {
             if (i % 16 == 0 && i != 0) {
                 if (i != currentApplePosition) {
@@ -81,20 +83,22 @@ function updateView() {
 
 
         }
+
+        htmlCode += `</br></br><h1>Du har: ${points} poeng</h1>`;
+
     } else {
         htmlCode += /*HTML*/`
         <h1>Game over! Du fikk ${points} poeng!</h1>
         <p>Spill igjen? <button onclick ="restart()">Start på nytt</button></p>
         `;
     }
-    htmlCode += `<div><h1>Du har: ${points} poeng</h1></div>`;
     console.log(snake.getPosition(3, 5));
     app.innerHTML = htmlCode;
 }
 
 //Controller
 
-function restart(){
+function restart() {
     gameOver = false;
     updateView();
 }
@@ -124,7 +128,9 @@ function startGameLoop() {
 }
 
 function gameOverFunction() {
-    clearInterval();
+    gameOver = true;
+    clearInterval(startGameLoop());
+
     snake = {
         snakeLength: 5,
         position: [
@@ -143,7 +149,6 @@ function gameOverFunction() {
 
     currentApplePosition = 6;
     gameStart = false;
-    gameOver = true;
     updateView();
 }
 
