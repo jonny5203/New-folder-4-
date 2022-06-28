@@ -133,6 +133,7 @@ function gameOverFunction() {
     gameOver = false;
     gameStart = false;
     points = 0;
+    updateView();
 }
 
 function gameTick() {
