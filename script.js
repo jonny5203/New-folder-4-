@@ -1,20 +1,15 @@
 let app;
 
 //Model
-let gameStart = false;
 let points = 0;
 let highscore = 0;
 let gameOver = false;
 
 const board = 16 ** 2;
 
-let lastCell; // hodet til slangen
-
 let gameInterval;
 
 let currentApplePosition = 6;
-
-let currentCell; // snake.position[-1]??
 
 let snake = {
     snakeLength: 5,
@@ -158,7 +153,6 @@ function gameOverFunction() {
     }
 
     currentApplePosition = 6;
-    gameStart = false;
     updateView();
 }
 
