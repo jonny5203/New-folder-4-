@@ -113,10 +113,26 @@ function startGameLoop() {
 
 function gameOverFunction() {
     clearInterval();
-}
+    snake = {
+        snakeLength: 5,
+        position: [
+            0,
+            1,
+            2,
+            3,
+            4
+        ],
+        direction: 1,
+        getPosition: function(a,b){
+            let y = a+b;
+            return y;
+        }
+    };
 
-function checkGameOver() {
-
+    currentApplePosition = 6;
+    gameOver = false;
+    gameStart = false;
+    points = 0;
 }
 
 function gameTick() {
@@ -136,12 +152,28 @@ function moveSnake() {
         } else {
             //console.log(i);
             if (snake.direction == 0) {
+                if(snake.position[i] - 16 < 0 || snake.position[i] - 16 == null || snake.position.includes(snake.position[i] - 16)){
+                    gameOverFunction();
+                    return;
+                }
                 snake.position[i] -= 16;
             } else if (snake.direction == 1) {
+                if(snake.position[i] - 1 < 0 || snake.position[i] - 1 == null || snake.position.includes(snake.position[i] - 1)){
+                    gameOverFunction();
+                    return;
+                }
                 snake.position[i] -= 1;
             } else if (snake.direction == 2) {
+                if(snake.position[i] + 16 > 255 || snake.position[i] + 16 == null || snake.position.includes(snake.position[i] + 16)){
+                    gameOverFunction();
+                    return;
+                }
                 snake.position[i] += 16;
             } else if (snake.direction == 3) {
+                if(snake.position[i] + 1 > 255 || snake.position[i] + 1 == null || snake.position.includes(snake.position[i] + 1)){
+                    gameOver();
+                    return;
+                }
                 snake.position[i] += 1;
             }
         }
