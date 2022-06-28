@@ -146,7 +146,7 @@ function gameOverFunction() {
             3,
             4
         ],
-        direction: 1,
+        direction: 3,
         getPosition: function (a, b) {
             let y = a + b;
             return y;
