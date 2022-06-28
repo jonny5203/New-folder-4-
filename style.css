@@ -1,0 +1,48 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+div.cell {
+    background-color: green;
+    padding: 1px;
+    margin: 0.04rem;
+    border: solid rgb(0, 0, 0) 1px;
+    width: 35px;
+    height: 35px;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.forstPaLinje {
+    clear: left;
+}
+
+/* .cell { /*Needs a border around the game board
+    padding: 1px;
+    margin: 1px;
+    border: 3px solid red;
+} */
+
+div.snake {
+    color: rgb(255, 0, 200);
+    background-color: rgb(97, 0, 48);
+    font-weight: bolder;
+    font-size: xx-large;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spillBrett{
+    border: 5px solid red;
+}
+
+div.apple {
+    color: rgb(1, 224, 1);
+    background-color: green;
+}
