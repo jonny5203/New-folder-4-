@@ -9,6 +9,8 @@ const board = 16 ** 2;
 
 let lastCell; // hodet til slangen
 
+let gameInterval;
+
 let currentApplePosition = 6;
 
 let currentCell; // snake.position[-1]??
@@ -124,12 +126,12 @@ document.addEventListener('keydown', function (event) {
 });
 
 function startGameLoop() {
-    setInterval(gameTick, 300);
+    gameInterval = setInterval(gameTick, 300);
 }
 
 function gameOverFunction() {
     gameOver = true;
-    clearInterval(startGameLoop());
+    clearInterval(gameInterval);
 
     snake = {
         snakeLength: 5,
