@@ -88,7 +88,7 @@ function updateView() {
         }
 
         htmlCode += `</br></br><h1>Du har: ${points} poeng</h1>`;
-        htmlCode += `<h1>Highscore: ${highscore} poeng</h1>`;
+        htmlCode += `<h1>Highscoren din er: ${highscore} poeng</h1>`;
 
     } else {
         htmlCode += /*HTML*/`
@@ -103,6 +103,7 @@ function updateView() {
 //Controller
 
 function restart() {
+    points = 0;
     gameOver = false;
     updateView();
 }
