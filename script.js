@@ -23,8 +23,8 @@ let snake = {
         4
     ],
     direction: 1,
-    getPosition: function(a,b){
-        let y = a+b;
+    getPosition: function (a, b) {
+        let y = a + b;
         return y;
     }
 };
@@ -42,66 +42,78 @@ window.onload = function () {
 };
 function updateView() {
     let htmlCode = '';
-    for (let i = 0; i < board; i++) {
-        if (i % 16 == 0 && i != 0) {
-            if (i != currentApplePosition) {
-                if (snake.position.includes(i)) {
-                    htmlCode += '<div class="cell forstPaLinje snake">♥</div>';
+    if (!gameOver) {
+        for (let i = 0; i < board; i++) {
+            if (i % 16 == 0 && i != 0) {
+                if (i != currentApplePosition) {
+                    if (snake.position.includes(i)) {
+                        htmlCode += '<div class="cell forstPaLinje snake">♥</div>';
+                    } else {
+                        htmlCode += '<div class="cell forstPaLinje"></div>';
+                    }
                 } else {
-                    htmlCode += '<div class="cell forstPaLinje"></div>';
+                    if (snake.position.includes(i)) {
+                        htmlCode += '<div class="cell forstPaLinje snake">♥</div>';
+                    } else {
+                        htmlCode += '<div class="cell forstPaLinje APPLE"></div>';
+                    }
                 }
+
             } else {
-                if (snake.position.includes(i)) {
-                    htmlCode += '<div class="cell forstPaLinje snake">♥</div>';
+                if (i != currentApplePosition) {
+                    if (snake.position.includes(i)) {
+                        htmlCode += '<div class="cell snake">♥</div>';
+                    } else {
+                        htmlCode += '<div class="cell"></div>';
+                    }
                 } else {
-                    htmlCode += '<div class="cell forstPaLinje APPLE"></div>';
+                    if (snake.position.includes(i)) {
+                        htmlCode += '<div class="cell snake">♥</div>';
+                    } else {
+                        htmlCode += '<div class="cell apple">🍏</div>';
+                    } // slangen kan se sånn her ut: ~---> ~ er rumpa, - er kroppen, > er hodet. 
+                    // Sjekke om snake.position er den minste i snake.position, hvis den er det, så får den ~ (rumpa).
+                    // Hvis den er ikke den minste, men ikke den største, så er den - (kropp).
+                    // Hvis den er den største så får den > (hodet).
                 }
+
             }
 
-        } else {
-            if (i != currentApplePosition) {
-                if (snake.position.includes(i)) {
-                    htmlCode += '<div class="cell snake">♥</div>';
-                } else {
-                    htmlCode += '<div class="cell"></div>';
-                }
-            } else {
-                if (snake.position.includes(i)) {
-                    htmlCode += '<div class="cell snake">♥</div>';
-                } else {
-                    htmlCode += '<div class="cell apple">🍏</div>';
-                } // slangen kan se sånn her ut: ~---> ~ er rumpa, - er kroppen, > er hodet. 
-                // Sjekke om snake.position er den minste i snake.position, hvis den er det, så får den ~ (rumpa).
-                // Hvis den er ikke den minste, men ikke den største, så er den - (kropp).
-                // Hvis den er den største så får den > (hodet).
-            }
 
         }
-    
-
+    } else {
+        htmlCode += /*HTML*/`
+        <h1>Game over! Du fikk ${points} poeng!</h1>
+        <p>Spill igjen? <button onclick ="restart()">Start på nytt</button></p>
+        `;
     }
     htmlCode += `<div><h1>Du har: ${points} poeng</h1></div>`;
-    console.log(snake.getPosition(3,5));
+    console.log(snake.getPosition(3, 5));
     app.innerHTML = htmlCode;
 }
 
 //Controller
 
+function restart(){
+    gameOver = false;
+    updateView();
+}
+
 document.addEventListener('keydown', function (event) {
     if (event.key == "w") {
-        if(snake.direction != 2){
+        if (snake.direction != 2) {
             snake.direction = 0;
         }
     } else if (event.key == "a") {
-        if(snake.direction != 3){
+        if (snake.direction != 3) {
             snake.direction = 1;
         }
     } else if (event.key == "s") {
-        if(snake.direction != 0){
+        if (snake.direction != 0) {
             snake.direction = 2;
         }
     } else if (event.key == "d") {
-        if(snake.direction != 1){
+        if (snake.direction != 1) {
             snake.direction = 3;
         }
     }
@@ -123,16 +135,15 @@ function gameOverFunction() {
             4
         ],
         direction: 1,
-        getPosition: function(a,b){
-            let y = a+b;
+        getPosition: function (a, b) {
+            let y = a + b;
             return y;
         }
     };
 
     currentApplePosition = 6;
-    gameOver = false;
     gameStart = false;
-    points = 0;
+    gameOver = true;
     updateView();
 }
 
@@ -153,26 +164,26 @@ function moveSnake() {
         } else {
             //console.log(i);
             if (snake.direction == 0) {
-                if(snake.position[i] - 16 < 0 || snake.position[i] - 16 == null || snake.position.includes(snake.position[i] - 16)){
+                if (snake.position[i] - 16 < 0 || snake.position[i] - 16 == null || snake.position.includes(snake.position[i] - 16)) {
                     gameOverFunction();
                     return;
                 }
                 snake.position[i] -= 16;
             } else if (snake.direction == 1) {
-                if(snake.position[i] - 1 < 0 || snake.position[i] - 1 == null || snake.position.includes(snake.position[i] - 1)){
+                if (snake.position[i] - 1 < 0 || snake.position[i] - 1 == null || snake.position.includes(snake.position[i] - 1)) {
                     gameOverFunction();
                     return;
                 }
                 snake.position[i] -= 1;
             } else if (snake.direction == 2) {
-                if(snake.position[i] + 16 > 255 || snake.position[i] + 16 == null || snake.position.includes(snake.position[i] + 16)){
+                if (snake.position[i] + 16 > 255 || snake.position[i] + 16 == null || snake.position.includes(snake.position[i] + 16)) {
                     gameOverFunction();
                     return;
                 }
                 snake.position[i] += 16;
             } else if (snake.direction == 3) {
-                if(snake.position[i] + 1 > 255 || snake.position[i] + 1 == null || snake.position.includes(snake.position[i] + 1)){
-                    gameOver();
+                if (snake.position[i] + 1 > 255 || snake.position[i] + 1 == null || snake.position.includes(snake.position[i] + 1)) {
+                    gameOverFunction();
                     return;
                 }
                 snake.position[i] += 1;
