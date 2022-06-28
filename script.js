@@ -93,7 +93,6 @@ function updateView() {
     } else {
         htmlCode += /*HTML*/`
         <h1>Game over! Du fikk ${points} poeng!</h1>
-        <h1>Highscoren din er: ${highscore}</h1>
         <p>Spill igjen? <button onclick ="restart()">Start på nytt</button></p>
         `;
     }
@@ -105,7 +104,6 @@ function updateView() {
 
 function restart() {
     gameOver = false;
-    points = 0;
     updateView();
 }
 
@@ -157,7 +155,6 @@ function gameOverFunction() {
         highscore = points;
     }
 
-    //points = 0;
     currentApplePosition = 6;
     gameStart = false;
     updateView();
