@@ -38,6 +38,12 @@ const right = 'd';
 const left = 'a';
 
 
+// vanskelighetsgrader
+const easy = 300;
+const medium = 150;
+const hard = 50;
+
+
 //View
 window.onload = function () {
     app = document.getElementById('app');
@@ -46,7 +52,10 @@ window.onload = function () {
 function updateView() {
     let htmlCode = '';
     if (!gameOver) {
-        htmlCode += `<button onclick="startGameLoop()">Start</button></br>`;
+        htmlCode += `
+        <button onclick="startGameLoop(${easy})">Easy</button>
+        <button onclick="startGameLoop(${medium})">Medium</button>
+        <button onclick="startGameLoop(${hard})">Hard</button></br>`;
 
         for (let i = 0; i < board; i++) {
             if (i % 16 == 0 && i != 0) {
@@ -128,8 +137,8 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-function startGameLoop() {
-    gameInterval = setInterval(gameTick, 300);
+function startGameLoop(a) {
+    gameInterval = setInterval(gameTick, a);
 }
 
 function gameOverFunction() {
