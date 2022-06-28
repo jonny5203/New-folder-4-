@@ -88,7 +88,7 @@ function updateView() {
         }
 
         htmlCode += `</br></br><h1>Du har: ${points} poeng</h1>`;
-        htmlCode += `<h1>Highscore: ${points} poeng</h1>`;
+        htmlCode += `<h1>Highscore: ${highscore} poeng</h1>`;
 
     } else {
         htmlCode += /*HTML*/`
@@ -151,7 +151,7 @@ function gameOverFunction() {
         }
     };
 
-    if(points > highscore){
+    if(points >= highscore){
         highscore = points;
     }
 
